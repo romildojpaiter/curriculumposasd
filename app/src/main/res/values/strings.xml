@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Curriculum POS ASD</string>
+    <string name="action_perfil">Perfil</string>
+    <string name="table_layout_4_open">Layout 4 open</string>
+    <string name="table_layout_4_open_shortcut">Layout Shotcurt</string>
+    <string name="table_layout_4_save">Save</string>
+    <string name="table_layout_4_save_shortcut">Shotcurt</string>
+    <string name="foto_aluno">Foto Aluno</string>
+    <string name="nome">Nome</string>
+    <string name="nome_curriculum">Romildo Jozué Paiter</string>
+    <string name="formacao">Formacao</string>
+    <string name="formacao_academica">Formação Acadêmica</string>
+    <string name="formacao_profissional">Formação Profissional</string>
+    <string name="experiencia_profissional">Experiência Profissional</string>
+    <string name="action_close">Sair</string>
+    <string name="app_activity_perfil">Perfil</string>
+    <string name="email">E-mail</string>
+    <string name="descricao">Descrição</string>
+    <string name="salvar">Salvar</string>
+</resources>

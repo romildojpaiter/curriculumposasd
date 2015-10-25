@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context="br.com.gpaiter.curriculumposasd.activitys.PerfilActivity">
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1,2">
+
+        <TextView android:text="@string/nome" android:paddingTop="15dp" />
+        <EditText
+            android:id="@+id/nome"
+            android:inputType="text" >
+        </EditText>
+
+        <TextView android:text="@string/email" android:paddingTop="15dp" />
+        <EditText
+            android:id="@+id/email"
+            android:inputType="textEmailAddress" >
+        </EditText>
+
+        <TextView android:text="@string/descricao" android:paddingTop="15dp" />
+        <EditText
+            android:id="@+id/descricao"
+            android:inputType="text" >
+        </EditText>
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:onClick="salvarPerfil"
+            android:text="@string/salvar" />
+
+    </TableLayout>
+
+
+
+</ScrollView>
