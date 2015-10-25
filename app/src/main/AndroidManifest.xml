@@ -19,18 +19,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activitys.FormcacaoAcademicaListActivity"
-            android:parentActivityName=".CurriculumMainActivity"
-            android:label="@string/formacao_profissional">
+            android:name=".activitys.FormacaoAcademicaActivity"
+            android:label="@string/formacao_academica"
+            android:parentActivityName=".CurriculumMainActivity" >
         </activity>
         <activity
-            android:name=".activitys.ExperienciaProfisionalListActivity"
-            android:parentActivityName=".CurriculumMainActivity"
-            android:label="@string/experiencia_profissional">
+            android:name=".activitys.ExperienciaProfisionalActivity"
+            android:label="@string/experiencia_profissional"
+            android:parentActivityName=".CurriculumMainActivity" >
         </activity>
-        <activity android:name=".activitys.PerfilActivity"
-            android:parentActivityName=".CurriculumMainActivity"
-            android:label="@string/app_activity_perfil">
+        <activity
+            android:name=".activitys.PerfilActivity"
+            android:label="@string/app_activity_perfil"
+            android:parentActivityName=".CurriculumMainActivity" >
+        </activity>
+        <activity android:name=".activitys.CadastrarExperienciaProfissionalActivity"
+            android:label="@string/action_cadastrar_exp_pro"
+            android:parentActivityName=".activitys.ExperienciaProfisionalActivity" >
+        </activity>
+        <activity android:name=".activitys.CadastrarFormacaoAcademicaActivity"
+            android:label="@string/action_cadastrar_for_aca"
+            android:parentActivityName=".activitys.FormacaoAcademicaActivity" >
         </activity>
     </application>
 

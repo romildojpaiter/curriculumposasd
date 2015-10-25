@@ -17,4 +17,10 @@
     <string name="email">E-mail</string>
     <string name="descricao">Descrição</string>
     <string name="salvar">Salvar</string>
+    <string name="action_cadastrar">Cadastrar</string>
+    <string name="emprego_atual">Emprego Atual</string>
+    <string name="inicio">Início</string>
+    <string name="termino">Termino</string>
+    <string name="action_cadastrar_exp_pro">Cadastrar Experiência Profissional</string>
+    <string name="action_cadastrar_for_aca">Cadastrar Formação Acadêmica</string>
 </resources>

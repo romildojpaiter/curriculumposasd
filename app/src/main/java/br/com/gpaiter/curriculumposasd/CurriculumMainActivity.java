@@ -1,6 +1,7 @@
 package br.com.gpaiter.curriculumposasd;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,11 +9,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import br.com.gpaiter.curriculumposasd.activitys.ExperienciaProfisionalListActivity;
-import br.com.gpaiter.curriculumposasd.activitys.FormcacaoAcademicaListActivity;
+import br.com.gpaiter.curriculumposasd.activitys.ExperienciaProfisionalActivity;
+import br.com.gpaiter.curriculumposasd.activitys.FormacaoAcademicaActivity;
 import br.com.gpaiter.curriculumposasd.activitys.PerfilActivity;
 import br.com.gpaiter.curriculumposasd.database.DatabaseHelper;
 
@@ -24,7 +25,7 @@ public class CurriculumMainActivity extends AppCompatActivity {
     private static final String EMAIL = "email";
     private static final String DESCRICAO = "descricao";
 
-    private EditText nome, email, descricao;
+    private TextView nome, email, descricao;
 
     // Utilizado para gravar no banco de dados
     private DatabaseHelper helper;
@@ -39,15 +40,34 @@ public class CurriculumMainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+        nome = (TextView) findViewById(R.id.nome);
+        email = (TextView) findViewById(R.id.email);
+        descricao = (TextView) findViewById(R.id.descricao);
 
+        // prepara acesso ao banco de dados
+        helper = new DatabaseHelper(this);
+
+        // Pesquisa sempre pelo primeiro item da tabela
+        pesquisarPerfilPrincipal();
+
+    }
+
+    private void pesquisarPerfilPrincipal() {
+        database = helper.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT _id, nome, email, descricao FROM " +
+                        DatabaseHelper.TB_PERFIL + " WHERE _id = ?", new String[] { "1" }
+        );
+
+        if (cursor.getCount() > 0){
+            cursor.moveToFirst();
+
+            _ID = cursor.getInt(0);
+            nome.setText(cursor.getString(1));
+            email.setText(cursor.getString(2));
+            descricao.setText(cursor.getString(3));
+        }
+        cursor.close();
+        helper.close();
     }
 
     @Override
@@ -77,10 +97,10 @@ public class CurriculumMainActivity extends AppCompatActivity {
     public void botaoSelecionado(View view){
         switch (view.getId()){
             case R.id.btnVisualizarFormacaoAcademica:
-                startActivity(new Intent(this, FormcacaoAcademicaListActivity.class));
+                startActivity(new Intent(this, FormacaoAcademicaActivity.class));
                 break;
             case R.id.btnVisualizarFormacaoProfissional:
-                startActivity(new Intent(this, ExperienciaProfisionalListActivity.class));
+                startActivity(new Intent(this, ExperienciaProfisionalActivity.class));
                 break;
 
         }

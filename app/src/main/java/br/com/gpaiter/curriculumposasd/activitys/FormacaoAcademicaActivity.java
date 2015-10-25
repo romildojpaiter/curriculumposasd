@@ -1,7 +1,10 @@
 package br.com.gpaiter.curriculumposasd.activitys;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,7 +17,7 @@ import java.util.Map;
 
 import br.com.gpaiter.curriculumposasd.R;
 
-public class FormcacaoAcademicaListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class FormacaoAcademicaActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private List<Map<String, Object>> formacoesAcademicas;
     private ListView listView;
@@ -22,19 +25,22 @@ public class FormcacaoAcademicaListActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_formcacao_academica_list);
-
-
+        setContentView(R.layout.activity_formcacao_academica);
 
         listView= (ListView) findViewById(R.id.formacaoAcademicaListView);
 
         String[] de = {"imagem", "destino", "data", "total"};
-        int[] para = {R.id.tipoViagem, R.id.destino, R.id.data, R.id.valor};
+        int[] para = {R.id.tipoFormacao, R.id.descricao, R.id.inicio, R.id.termino};
         SimpleAdapter adapter = new SimpleAdapter(this, listarFormacaoAcademia(), R.layout.experiencia_profissional_listview, de, para);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
 
+    }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_formacao_academica, menu);
+        return true;
     }
 
     private List<? extends Map<String, Object>> listarFormacaoAcademia() {
@@ -63,4 +69,17 @@ public class FormcacaoAcademicaListActivity extends AppCompatActivity implements
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id == R.id.action_cadastrar) {
+            startActivity(new Intent(this, CadastrarFormacaoAcademicaActivity.class));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

@@ -1,8 +1,10 @@
 package br.com.gpaiter.curriculumposasd.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -16,7 +18,7 @@ import java.util.Map;
 
 import br.com.gpaiter.curriculumposasd.R;
 
-public class ExperienciaProfisionalListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ExperienciaProfisionalActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private List<Map<String, Object>> experienciasProfissionais;
     private ListView listView;
@@ -24,22 +26,15 @@ public class ExperienciaProfisionalListActivity extends AppCompatActivity implem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_experiencia_profisional_list);
-
+        setContentView(R.layout.activity_experiencia_profisional);
 
         listView= (ListView) findViewById(R.id.experienciaProfissionalListView);
 
-        // String[] values = new String[] { "Ubuntu", "Android", "iPhone", "Windows", "Ubuntu", "Android", "iPhone", "Windows" };
-        // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values);
-        // viewContainer = findViewById(R.id.undobar);
-        // listView.setAdapter(adapter);
-
         String[] de = {"imagem", "destino", "data", "total"};
-        int[] para = {R.id.tipoViagem, R.id.destino, R.id.data, R.id.valor};
+        int[] para = { R.id.tipoProjeto, R.id.descricao, R.id.inicio, R.id.termino };
         SimpleAdapter adapter = new SimpleAdapter(this, listarExperienciaProfissional(), R.layout.experiencia_profissional_listview, de, para);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
-
 
     }
 
@@ -70,7 +65,6 @@ public class ExperienciaProfisionalListActivity extends AppCompatActivity implem
         return true;
     }
 
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -79,5 +73,18 @@ public class ExperienciaProfisionalListActivity extends AppCompatActivity implem
         String mensagem = "Viagem selecionada: "+ destino;
         Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id == R.id.action_cadastrar) {
+            startActivity(new Intent(this, CadastrarExperienciaProfissionalActivity.class));
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 }
