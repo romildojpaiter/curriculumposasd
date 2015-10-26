@@ -6,11 +6,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import br.com.gpaiter.curriculumposasd.activitys.ExperienciaProfisionalActivity;
 import br.com.gpaiter.curriculumposasd.activitys.FormacaoAcademicaActivity;
@@ -104,6 +104,19 @@ public class CurriculumMainActivity extends AppCompatActivity {
                 break;
 
         }
-        Toast.makeText(this, "Item selecionado: " + view.getId(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("Aplicaçao Pausada", "Aplicaçao Pausada");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        Log.d("Aplicaçao Restartada", "Aplicaçao Restartada");
+        this.pesquisarPerfilPrincipal();
     }
 }

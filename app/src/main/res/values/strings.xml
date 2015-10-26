@@ -23,4 +23,10 @@
     <string name="termino">Termino</string>
     <string name="action_cadastrar_exp_pro">Cadastrar Experiência Profissional</string>
     <string name="action_cadastrar_for_aca">Cadastrar Formação Acadêmica</string>
+    <string name="opcoes">Opções</string>
+    <string name="excluir">Excluir</string>
+    <string name="remover">Remover</string>
+    <string name="confirmacao_exclusao_formacao_academica">Confirma exclusão da formação acadêmica</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
 </resources>

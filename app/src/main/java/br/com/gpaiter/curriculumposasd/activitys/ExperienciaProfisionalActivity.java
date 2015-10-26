@@ -1,15 +1,16 @@
 package br.com.gpaiter.curriculumposasd.activitys;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,43 +18,49 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.gpaiter.curriculumposasd.R;
+import br.com.gpaiter.curriculumposasd.dao.ExperienciaProfissionalDAO;
+import br.com.gpaiter.curriculumposasd.domain.ExperienciaProfissional;
 
-public class ExperienciaProfisionalActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ExperienciaProfisionalActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnClickListener {
 
     private List<Map<String, Object>> experienciasProfissionais;
     private ListView listView;
+
+    private ExperienciaProfissionalDAO DAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_experiencia_profisional);
 
-        listView= (ListView) findViewById(R.id.experienciaProfissionalListView);
+        DAO = new ExperienciaProfissionalDAO(this);
+        listView = (ListView) findViewById(R.id.experienciaProfissionalListView);
+        atualizaListaExperiencias();
 
-        String[] de = {"imagem", "destino", "data", "total"};
+    }
+
+    private void atualizaListaExperiencias() {
+        String[] de = {"tipoProjeto", "descricao", "inicio", "termino"};
         int[] para = { R.id.tipoProjeto, R.id.descricao, R.id.inicio, R.id.termino };
         SimpleAdapter adapter = new SimpleAdapter(this, listarExperienciaProfissional(), R.layout.experiencia_profissional_listview, de, para);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
-
     }
 
     private List<? extends Map<String, Object>> listarExperienciaProfissional() {
+
+        List<ExperienciaProfissional> lista = DAO.getListaOrdenada();
         experienciasProfissionais = new ArrayList<Map<String,Object>>();
 
-        Map<String, Object> item = new HashMap<String, Object>();
-        item.put("imagem", R.drawable.negocios);
-        item.put("destino", "São Paulo");
-        item.put("data","02/02/2012 a 04/02/2012");
-        item.put("total", "Gasto total R$ 314,98");
-        experienciasProfissionais.add(item);
+        for (ExperienciaProfissional experiencia : lista) {
 
-        item = new HashMap<String, Object>();
-        item.put("imagem", R.drawable.lazer);
-        item.put("destino", "Maceió");
-        item.put("data","14/05/2012 a 22/05/2012");
-        item.put("total", "Gasto total R$ 25834,67");
-        experienciasProfissionais.add(item);
+            Map<String, Object> item = new HashMap<String, Object>();
+            item.put("tipoProjeto", R.drawable.negocios);
+            item.put("descricao", experiencia.getDescricao());
+            item.put("inicio", experiencia.getInicio());
+            item.put("termino", experiencia.getTermino());
+            experienciasProfissionais.add(item);
+        }
 
         return experienciasProfissionais;
     }
@@ -68,10 +75,10 @@ public class ExperienciaProfisionalActivity extends AppCompatActivity implements
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Map<String, Object> map = experienciasProfissionais.get(position);
+/*        Map<String, Object> map = experienciasProfissionais.get(position);
         String destino = (String) map.get("destino");
         String mensagem = "Viagem selecionada: "+ destino;
-        Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();*/
 
     }
 
@@ -84,7 +91,18 @@ public class ExperienciaProfisionalActivity extends AppCompatActivity implements
             return true;
         }
 
-
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("Aplicaçao Restartada", "Aplicaçao Restartada");
+        this.atualizaListaExperiencias();
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int item) {
+
     }
 }

@@ -15,10 +15,6 @@ import br.com.gpaiter.curriculumposasd.database.DatabaseHelper;
 public class PerfilActivity extends AppCompatActivity {
 
     private Integer _ID = null;
-    private static final String NOME = "nome";
-    private static final String EMAIL = "email";
-    private static final String DESCRICAO = "descricao";
-
     private EditText nome, email, descricao;
 
     // Utilizado para gravar no banco de dados
@@ -68,9 +64,9 @@ public class PerfilActivity extends AppCompatActivity {
         database = helper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(NOME, nome.getText().toString());
-        values.put(EMAIL, email.getText().toString());
-        values.put(DESCRICAO, descricao.getText().toString());
+        values.put(DatabaseHelper.Perfil.NOME, nome.getText().toString());
+        values.put(DatabaseHelper.Perfil.EMAIL, email.getText().toString());
+        values.put(DatabaseHelper.Perfil.DESCRICAO, descricao.getText().toString());
 
         long resultado = -1;
         if (_ID != null){
@@ -81,11 +77,11 @@ public class PerfilActivity extends AppCompatActivity {
 
         if ( resultado != -1){
             String mensagem = "Perfil salvo com sucesso";
-            Toast.makeText(this, mensagem, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
             finish();
         } else {
             String mensagem = "Ocorreu um erro ao salvar o Perfil";
-            Toast.makeText(this, mensagem, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
         }
 
     }

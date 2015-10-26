@@ -17,6 +17,13 @@
             android:inputType="text" >
         </EditText>
 
+        <CheckBox
+            android:id="@+id/empregoAtual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/emprego_atual"
+            android:onClick="desabilitaTermino"/>
+
         <TextView android:text="@string/inicio" android:paddingTop="15dp" />
         <EditText
             android:id="@+id/inicio"
@@ -33,11 +40,6 @@
             android:maxLength="4">
         </EditText>
 
-        <CheckBox
-            android:id="@+id/empregoAtual"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/emprego_atual" />
 
         <Button
             android:layout_marginTop="20dp"
